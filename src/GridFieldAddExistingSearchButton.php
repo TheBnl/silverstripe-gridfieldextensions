@@ -4,6 +4,7 @@ namespace SilverStripe\GridFieldExtensions;
 
 use SilverStripe\Forms\GridField\GridField_HTMLProvider;
 use SilverStripe\Forms\GridField\GridField_URLHandler;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\View\ArrayData;
 
