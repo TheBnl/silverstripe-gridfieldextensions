@@ -77,6 +77,6 @@ class GridFieldExternalLink extends GridFieldDataColumns
             'Text' => $record->hasMethod('getExternalLinkText') ? $record->getExternalLinkText() : 'External Link'
         ));
 
-        return $data->renderWith('GridFieldExternalLink');
+        return $data->renderWith('SilverStripe\\GridFieldExtensions\\GridFieldExternalLink');
     }
 }
