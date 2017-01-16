@@ -82,6 +82,11 @@
 	box-shadow: none;
 	float: left;
 	margin: 0 4px 0 0;
+	padding: 0;
+}
+
+.ss-gridfield-add-new-multi-class .form-group:after {
+	border: none;
 }
 
 /**
@@ -90,6 +95,10 @@
 
 .ss-gridfield-editable .readonly {
 	padding-top: 0 !important;
+}
+
+.ss-gridfield-editable .col-editable {
+	padding: 8px 16px;
 }
 
 .ss-gridfield-editable input.text,
@@ -134,7 +143,6 @@
 
 .ss-gridfield-orderable .col-reorder {
 	position: relative;
-	padding: 0 !important;
 	width: 16px !important;
 }
 
@@ -154,7 +162,7 @@
 	width: 5px;
 	height: 11px;
 	margin: -5px 0 0 -2px;
-	background-image: url('../../framework/thirdparty/jquery-ui-themes/smoothness/images/ui-icons_222222_256x240.png');
+	background-image: url('../images/ui-icons_222222_256x240.png');
 	background-position: -5px -227px;
 }
 

@@ -2,6 +2,7 @@
 
 namespace SilverStripe\GridFieldExtensions;
 
+use Exception;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\RequestHandler;
 use SilverStripe\Core\ClassInfo;
@@ -17,8 +18,8 @@ use SilverStripe\ORM\DB;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataObjectInterface;
 use SilverStripe\ORM\ManyManyList;
+use SilverStripe\ORM\Map;
 use SilverStripe\ORM\SS_List;
-use SilverStripe\ORM\SS_Map;
 use SilverStripe\View\ViewableData;
 
 /**
@@ -238,7 +239,7 @@ class GridFieldOrderableRows extends RequestHandler implements
         // the correct sort order is saved. If you are not using that component,
         // this will be ignored by other components, but will still work for this.
         $sortFieldName = sprintf(
-            '%s[GridFieldEditableColumns][%s][%s]',
+            '%s[SilverStripe\\GridFieldExtensions\\GridFieldEditableColumns][%s][%s]',
             $grid->getName(),
             $record->ID,
             $this->getSortField()
@@ -343,12 +344,12 @@ class GridFieldOrderableRows extends RequestHandler implements
      */
     protected function getSortedIDs($data)
     {
-        if (empty($data['GridFieldEditableColumns'])) {
+        if (empty($data['SilverStripe\\GridFieldExtensions\\GridFieldEditableColumns'])) {
             return array();
         }
 
         $sortedIDs = array();
-        foreach ($data['GridFieldEditableColumns'] as $id => $recordData) {
+        foreach ($data['SilverStripe\\GridFieldExtensions\\GridFieldEditableColumns'] as $id => $recordData) {
             $sortValue = $recordData[$this->sortField];
             $sortedIDs[$sortValue] = $id;
         }
@@ -497,7 +498,7 @@ class GridFieldOrderableRows extends RequestHandler implements
         /** @var SS_List $map */
         $map = $list->map('ID', $sortField);
         //fix for versions of SS that return inconsistent types for `map` function
-        if ($map instanceof SS_Map) {
+        if ($map instanceof Map) {
             $map = $map->toArray();
         }
 

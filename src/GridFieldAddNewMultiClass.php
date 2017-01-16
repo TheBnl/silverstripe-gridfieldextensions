@@ -186,7 +186,7 @@ class GridFieldAddNewMultiClass implements GridField_HTMLProvider, GridField_URL
         $class     = $request->param('ClassName');
         $classes   = $this->getClasses($grid);
         $component = $grid->getConfig()->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDetailForm');
-
+	    
         if (!$component) {
             throw new Exception('The add new multi class component requires the detail form component.');
         }
@@ -203,6 +203,7 @@ class GridFieldAddNewMultiClass implements GridField_HTMLProvider, GridField_URL
             $grid->getForm()->getController(),
             'add-multi-class'
         );
+	    
         $handler->setTemplate($component->getTemplate());
 
         return $handler;

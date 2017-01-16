@@ -1,3 +1,3 @@
-<button href="$Link" class="ss-gridfield-add-new-inline ss-ui-action-constructive ss-ui-button" data-icon="add">
+<button href="$Link" class="btn btn-primary cms-content-addpage-button tool-button font-icon-plus" data-icon="add">
 	$Title
 </button>

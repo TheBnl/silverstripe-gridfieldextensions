@@ -2,6 +2,7 @@
 
 namespace SilverStripe\GridFieldExtensions;
 
+use Exception;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPResponse_Exception;
 use SilverStripe\Core\Object;
@@ -43,7 +44,7 @@ class GridFieldEditableColumns extends GridFieldDataColumns implements
      */
     protected $forms = array();
 
-    public function getColumnContent($grid, $record, $col)
+	public function getColumnContent($grid, $record, $col)
     {
         if (!$record->canEdit()) {
             return parent::getColumnContent($grid, $record, $col);
@@ -114,8 +115,9 @@ class GridFieldEditableColumns extends GridFieldDataColumns implements
         $sortable = $grid->getConfig()->getComponentByType('SilverStripe\\GridFieldExtensions\\GridFieldOrderableRows');
 
         $form = $this->getForm($grid, $record);
-
+	    
         foreach ($value[__CLASS__] as $id => $fields) {
+        	
             if (!is_numeric($id) || !is_array($fields)) {
                 continue;
             }
@@ -128,7 +130,7 @@ class GridFieldEditableColumns extends GridFieldDataColumns implements
 
             $extra = array();
 
-            $form->loadDataFrom($fields, Form::MERGE_CLEAR_MISSING);
+	        $form->loadDataFrom($fields, Form::MERGE_CLEAR_MISSING);
             $form->saveInto($item);
 
             // Check if we are also sorting these records
@@ -189,7 +191,7 @@ class GridFieldEditableColumns extends GridFieldDataColumns implements
 
         $list   = $grid->getList();
         $class  = $list ? $list->dataClass() : null;
-
+        
         foreach ($cols as $col => $info) {
             $field = null;
 
@@ -259,7 +261,7 @@ class GridFieldEditableColumns extends GridFieldDataColumns implements
 
             $fields->push($field);
         }
-
+	    
         return $fields;
     }
 
@@ -282,7 +284,7 @@ class GridFieldEditableColumns extends GridFieldDataColumns implements
             'editable/form',
             $record->ID
         ));
-
+        
         return $form;
     }
 
@@ -296,4 +298,13 @@ class GridFieldEditableColumns extends GridFieldDataColumns implements
             $name
         );
     }
+
+	public function getColumnAttributes($grid, $record, $col)
+	{
+		if (!$record->canEdit()) {
+			return parent::getColumnAttributes($grid, $record, $col);
+		}
+
+		return array('class' => 'col-editable col-' . preg_replace('/[^\w]/', '-', $col));
+	}
 }

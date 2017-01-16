@@ -2,6 +2,7 @@
 
 namespace SilverStripe\GridFieldExtensions;
 
+use Exception;
 use SilverStripe\Core\Convert;
 use SilverStripe\Core\Object;
 use SilverStripe\Forms\Form;
@@ -85,10 +86,13 @@ class GridFieldAddNewInlineButton implements GridField_HTMLProvider, GridField_S
 
         $fragment = $this->getFragment();
 
-        if (!$editable = $grid->getConfig()->getComponentByType('GridFieldEditableColumns')) {
+        if (!$editable = $grid->getConfig()->getComponentByType('SilverStripe\\GridFieldExtensions\\GridFieldEditableColumns')) {
             throw new Exception('Inline adding requires the editable columns component');
         }
 
+	    /**
+	     * Fixme: tmpl.js doens't exist anymore
+	     */
         Requirements::javascript(THIRDPARTY_DIR . '/javascript-templates/tmpl.js');
         GridFieldExtensions::include_requirements();
 
